@@ -3,46 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>Image to Text Converter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <header>
-            <h1>Your Website Title</h1>
-            <h2 class="description">A brief description of your website.</h2>
-        </header>
+    <header>
+        <h1>Image to Text Converter</h1>
+    </header>
 
-        <!-- Tool Interface -->
-        <div class="tool-box">
-            <!-- Upload Button -->
-            <div class="upload-container">
-                <button id="uploadBtn">
-                    <svg>...</svg> Upload
-                </button>
-                <input type="file" id="fileInput" class="hidden">
-            </div>
+    <main>
+        <label class="file-upload">
+            <input type="file" id="imageInput" accept="image/*">
+            <span>Choose File</span>
+        </label>
+        <div id="loading" style="display: none;">⏳ Processing...</div>
+        <div id="output"></div>
+    </main>
 
-            <!-- Paste Link Box -->
-            <div class="url-container">
-                <input type="text" id="urlInput" placeholder="Paste your link here">
-                <p class="supported-formats">Supported formats: .jpg, .png, .svg</p>
-                <button id="fetchBtn">Fetch Text</button>
-            </div>
-        </div>
-
-        <!-- Article Section -->
-        <div class="article-section">
-            <!-- Articles will be dynamically loaded here -->
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <!-- Footer content -->
-        </footer>
-    </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.0.2/tesseract.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
