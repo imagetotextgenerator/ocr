@@ -3,44 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to Text Converter</title>
+    <title>Your Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <!-- Header Section -->
         <header>
-            <h1>Image to Text Converter</h1>
-            <p class="description">Convert images to text easily. Upload an image or paste an image URL to extract text.</p>
+            <h1>Your Website Title</h1>
+            <h2 class="description">A brief description of your website.</h2>
         </header>
 
-        <!-- Tool Section -->
+        <!-- Tool Interface -->
         <div class="tool-box">
+            <!-- Upload Button -->
             <div class="upload-container">
-                <button id="imageInputBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                        <path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
-                    </svg> Upload Image
+                <button id="uploadBtn">
+                    <svg>...</svg> Upload
                 </button>
-                <input type="file" id="imageInput" accept="image/*" class="hidden">
+                <input type="file" id="fileInput" class="hidden">
             </div>
 
+            <!-- Paste Link Box -->
             <div class="url-container">
-                <input type="text" id="imageUrl" placeholder="Paste image URL">
-                <p class="supported-formats">Only .jpg, .png, .svg files supported.</p>
-                <button id="fetchBtn">Extract Text</button>
+                <input type="text" id="urlInput" placeholder="Paste your link here">
+                <p class="supported-formats">Supported formats: .jpg, .png, .svg</p>
+                <button id="fetchBtn">Fetch Text</button>
             </div>
         </div>
 
-        <!-- Output Section -->
-        <div class="output-section">
-            <div id="loader" class="hidden">Processing...</div>
-            <img id="preview" class="hidden" alt="Image Preview">
-            <div id="output" class="hidden"></div>
+        <!-- Article Section -->
+        <div class="article-section">
+            <!-- Articles will be dynamically loaded here -->
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <!-- Footer content -->
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
