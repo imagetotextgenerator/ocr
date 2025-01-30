@@ -11,31 +11,28 @@
         <!-- Header Section -->
         <header>
             <h1>Image to Text Converter</h1>
-            <p class="description">Convert images to text with ease. Upload an image or paste a link to extract text from the image.</p>
+            <p class="description">Convert images to text easily. Upload an image or paste an image URL to extract text.</p>
         </header>
 
         <!-- Tool Section -->
         <div class="tool-box">
             <div class="upload-container">
                 <button id="imageInputBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M3 3h18v18H3z" fill="none"/><path d="M3 9v10h18V9H3zm0-6v4h18V3H3z"/></svg> Upload Image
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" fill="none"/>
+                    </svg> Upload Image
                 </button>
                 <input type="file" id="imageInput" accept="image/*" class="hidden">
             </div>
 
             <div class="url-container">
                 <input type="text" id="imageUrl" placeholder="Paste image URL">
-                <p class="supported-formats">Only supported .jpg, .png, .svg formats.</p>
+                <p class="supported-formats">Only .jpg, .png, .svg files supported.</p>
                 <button id="fetchBtn">Extract Text</button>
             </div>
         </div>
 
-        <!-- Article Section -->
-        <div class="article-section">
-            <h2>Write an Article</h2>
-            <textarea placeholder="Write your article here..."></textarea>
-        </div>
-
+        <!-- Output Section -->
         <div class="output-section">
             <div id="loader" class="hidden">Processing...</div>
             <img id="preview" class="hidden" alt="Image Preview">
