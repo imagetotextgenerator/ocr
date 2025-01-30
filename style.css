@@ -58,6 +58,31 @@ img {
     100% { transform: rotate(360deg); }
 }
 
+/* Input Box */
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+}
+
+/* Button */
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
 /* Output */
 #output {
     background: #333;
