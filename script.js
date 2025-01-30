@@ -1,24 +1,43 @@
-document.getElementById('imageInput').addEventListener('change', function (event) {
-    let imageFile = event.target.files[0];
-    let preview = document.getElementById('preview');
+function processImage(imageSrc) {
     let output = document.getElementById('output');
     let loader = document.getElementById('loader');
 
-    if (imageFile) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-            preview.classList.remove('hidden');
-        };
-        reader.readAsDataURL(imageFile);
+    let img = new Image();
+    img.src = imageSrc;
+    img.onload = function () {
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
 
-        // Show Loader
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Convert to OpenCV Mat
+        let src = cv.imread(canvas);
+        let dst = new cv.Mat();
+
+        // Convert to Grayscale
+        cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
+
+        // Apply Thresholding to enhance text
+        cv.adaptiveThreshold(dst, dst, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 2);
+
+        // Convert back to Image
+        cv.imshow(canvas, dst);
+
+        // Run OCR on processed image
+        let processedImg = canvas.toDataURL("image/png");
+
+        // Clean up OpenCV Mats
+        src.delete();
+        dst.delete();
+
+        // Show loader
         loader.classList.remove('hidden');
         output.classList.add('hidden');
 
-        // Process OCR
         Tesseract.recognize(
-            imageFile,
+            processedImg,
             'eng',
             {
                 logger: (m) => console.log(m)
@@ -31,7 +50,5 @@ document.getElementById('imageInput').addEventListener('change', function (event
             loader.classList.add('hidden');
             alert("Error: " + err.message);
         });
-    } else {
-        alert("Please select an image.");
-    }
-});
+    };
+}
