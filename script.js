@@ -1,3 +1,7 @@
+document.getElementById('imageInputBtn').addEventListener('click', function () {
+    document.getElementById('imageInput').click();
+});
+
 document.getElementById('imageInput').addEventListener('change', function (event) {
     let imageFile = event.target.files[0];
     if (imageFile) {
@@ -19,7 +23,7 @@ function processImage(imageSource) {
     let output = document.getElementById('output');
     let loader = document.getElementById('loader');
 
-    // Hide Output
+    // Reset Output
     output.classList.add('hidden');
     loader.classList.remove('hidden');
 
