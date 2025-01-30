@@ -3,26 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to Text Generator</title>
+    <title>Image to Text Converter</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Header Section -->
         <header>
             <h1>Image to Text Converter</h1>
-            <p>Upload an image or paste an image URL to extract text.</p>
+            <p class="description">Convert images to text with ease. Upload an image or paste a link to extract text from the image.</p>
         </header>
-        <div class="upload-container">
-            <input type="file" id="imageInput" accept="image/*">
-            <p>Or</p>
-            <input type="text" id="imageUrl" placeholder="Paste image URL">
-            <button id="fetchBtn">Extract Text</button>
+
+        <!-- Tool Section -->
+        <div class="tool-box">
+            <div class="upload-container">
+                <button id="imageInputBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M3 3h18v18H3z" fill="none"/><path d="M3 9v10h18V9H3zm0-6v4h18V3H3z"/></svg> Upload Image
+                </button>
+                <input type="file" id="imageInput" accept="image/*" class="hidden">
+            </div>
+
+            <div class="url-container">
+                <input type="text" id="imageUrl" placeholder="Paste image URL">
+                <p class="supported-formats">Only supported .jpg, .png, .svg formats.</p>
+                <button id="fetchBtn">Extract Text</button>
+            </div>
         </div>
-        <div class="image-preview">
-            <img id="preview" class="hidden" alt="Image Preview">
+
+        <!-- Article Section -->
+        <div class="article-section">
+            <h2>Write an Article</h2>
+            <textarea placeholder="Write your article here..."></textarea>
+        </div>
+
+        <div class="output-section">
             <div id="loader" class="hidden">Processing...</div>
+            <img id="preview" class="hidden" alt="Image Preview">
+            <div id="output" class="hidden"></div>
         </div>
-        <div id="output" class="output hidden"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.1/dist/tesseract.min.js"></script>
