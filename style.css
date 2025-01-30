@@ -46,6 +46,8 @@ header {
 /* Upload Box */
 .upload-box {
     display: block;
+    max-width: 600px;
+    width: 90%;
     padding: 15px;
     border-radius: 10px;
     cursor: pointer;
