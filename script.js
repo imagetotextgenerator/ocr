@@ -10,55 +10,49 @@ document.getElementById('imageInput').addEventListener('change', function (event
             preview.src = e.target.result;
             preview.classList.remove('hidden');
 
-            // Wait for OpenCV to load, then process the image
-            setTimeout(() => {
+            // Process the image after loading OpenCV
+            preview.onload = function () {
                 processImage(preview);
-            }, 500);
+            };
         };
         reader.readAsDataURL(imageFile);
+
+        // Show Loader
+        loader.classList.remove('hidden');
+        output.classList.add('hidden');
     } else {
         alert("Please select an image.");
     }
 });
 
-function processImage(imgElement) {
+function processImage(imageElement) {
     let output = document.getElementById('output');
     let loader = document.getElementById('loader');
 
-    let canvas = document.createElement("canvas");
-    let ctx = canvas.getContext("2d");
-
-    canvas.width = imgElement.width;
-    canvas.height = imgElement.height;
-    ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-
-    let src = cv.imread(canvas);
+    let src = cv.imread(imageElement);
     let dst = new cv.Mat();
 
-    // **Apply Grayscale Conversion**
-    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
+    // Convert to grayscale
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY);
 
-    // **Increase Contrast**
-    cv.equalizeHist(dst, dst);
+    // Apply sharpening filter
+    let kernel = cv.matFromArray(3, 3, cv.CV_32F, [-1, -1, -1, -1, 9, -1, -1, -1, -1]);
+    cv.filter2D(dst, dst, -1, kernel);
 
-    // **Thresholding (Better OCR Readability)**
-    cv.threshold(dst, dst, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
+    // Apply adaptive thresholding
+    cv.adaptiveThreshold(dst, dst, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 2);
 
-    // Convert back to canvas
-    cv.imshow(canvas, dst);
+    // Save enhanced image to canvas for OCR
+    cv.imshow(imageElement, dst);
 
-    // Cleanup OpenCV memory
+    // Cleanup
     src.delete();
     dst.delete();
+    kernel.delete();
 
-    let processedImg = canvas.toDataURL("image/png");
-
-    // **Run OCR on Processed Image**
-    loader.classList.remove('hidden');
-    output.classList.add('hidden');
-
+    // Start OCR
     Tesseract.recognize(
-        processedImg,
+        imageElement,
         'eng',
         { logger: (m) => console.log(m) }
     ).then(({ data: { text } }) => {
