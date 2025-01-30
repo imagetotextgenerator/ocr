@@ -1,37 +1,53 @@
-/* Basic Styling */
+/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background: #000000;
+    color: #ffffff;
     margin: 0;
-    background: #121212;
-    color: #fff;
+    padding: 0;
 }
 
-/* Container */
-.container {
+/* Header */
+header {
+    background: #727CF5;
     text-align: center;
-    background: #1e1e1e;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-    max-width: 400px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Intro Section */
+.intro {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Tool Section */
+.tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
 }
 
 /* Upload Box */
 .upload-box {
     display: block;
-    padding: 15px;
-    border: 2px dashed #fff;
+    padding: 20px;
+    border: 2px dashed #727CF5;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    text-align: center;
+    background: #1e1e1e;
+    color: #ffffff;
+    width: 300px;
 }
 
 .upload-box:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #727CF5;
+    color: #000000;
 }
 
 /* Image Preview */
@@ -42,12 +58,12 @@ img {
     display: block;
 }
 
-/* Loader Animation */
+/* Loader */
 .loader {
     width: 40px;
     height: 40px;
     border: 5px solid transparent;
-    border-top: 5px solid #fff;
+    border-top: 5px solid #727CF5;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 15px auto;
@@ -65,6 +81,23 @@ img {
     border-radius: 5px;
     margin-top: 10px;
     word-wrap: break-word;
+    text-align: center;
+    max-width: 400px;
+}
+
+/* Article Section */
+.article {
+    padding: 30px;
+    text-align: center;
+}
+
+.article h2 {
+    color: #727CF5;
+}
+
+.article p {
+    max-width: 600px;
+    margin: auto;
 }
 
 /* Hidden Elements */
