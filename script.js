@@ -29,14 +29,11 @@ function processImage(imageSource) {
 
     if (typeof imageSource === "string") {
         // If it's a URL
-        let proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        let finalUrl = proxyUrl + imageSource; // Use the proxy URL to bypass CORS issue
-
         preview.src = imageSource;
         preview.classList.remove('hidden');
 
         // Recognize text from the image using Tesseract.js
-        Tesseract.recognize(finalUrl, 'eng', { logger: (m) => console.log(m) })
+        Tesseract.recognize(imageSource, 'eng', { logger: (m) => console.log(m) })
             .then(({ data: { text } }) => {
                 loader.classList.add('hidden');
                 output.innerText = text;
@@ -53,7 +50,7 @@ function processImage(imageSource) {
             preview.src = e.target.result;
             preview.classList.remove('hidden');
 
-            Tesseract.recognize(imageSource, 'eng', { logger: (m) => console.log(m) })
+            Tesseract.recognize(e.target.result, 'eng', { logger: (m) => console.log(m) })
                 .then(({ data: { text } }) => {
                     loader.classList.add('hidden');
                     output.innerText = text;
