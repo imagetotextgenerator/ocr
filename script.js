@@ -1,20 +1,37 @@
-document.getElementById("imageInput").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+document.getElementById('imageInput').addEventListener('change', function (event) {
+    let imageFile = event.target.files[0];
+    let preview = document.getElementById('preview');
+    let output = document.getElementById('output');
+    let loader = document.getElementById('loader');
 
-    const reader = new FileReader();
-    reader.onload = function() {
-        document.getElementById("loading").style.display = "block";
+    if (imageFile) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(imageFile);
 
-        Tesseract.recognize(reader.result, 'eng', {
-            logger: (m) => console.log(m)
-        }).then(({ data: { text } }) => {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("output").innerHTML = `<h3>Extracted Text:</h3><p>${text}</p>`;
+        // Show Loader
+        loader.classList.remove('hidden');
+        output.classList.add('hidden');
+
+        // Process OCR
+        Tesseract.recognize(
+            imageFile,
+            'eng',
+            {
+                logger: (m) => console.log(m)
+            }
+        ).then(({ data: { text } }) => {
+            loader.classList.add('hidden');
+            output.innerText = text;
+            output.classList.remove('hidden');
         }).catch(err => {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("output").innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
+            loader.classList.add('hidden');
+            alert("Error: " + err.message);
         });
-    };
-    reader.readAsDataURL(file);
+    } else {
+        alert("Please select an image.");
+    }
 });
