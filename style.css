@@ -1,26 +1,24 @@
-/* General Styles */
+/* Full-Screen Layout */
 body {
     font-family: 'Arial', sans-serif;
-    background: #F8F9FC;
+    background: #ffffff;
     color: #000000;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 /* Header */
 header {
     background: #ffffff;
     padding: 15px;
-    text-align: center;
     font-size: 22px;
     font-weight: bold;
-    border-bottom: 2px solid #E5E7EB;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Intro Section */
+/* Title & Description */
 .intro {
-    text-align: center;
     padding: 30px;
 }
 
@@ -49,33 +47,31 @@ header {
 .upload-box {
     display: block;
     padding: 15px;
-    border: 2px dashed #727CF5;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
     text-align: center;
-    background: #F3F4F6;
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+    background: linear-gradient(135deg, #727CF5, #5A67D8);
+    color: #ffffff;
+    border: none;
 }
 
 .upload-box:hover {
-    background: #727CF5;
-    color: #ffffff;
+    opacity: 0.8;
 }
 
-/* Upload Button */
-.upload-box span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+/* File Info */
+.file-info {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #4B5563;
 }
 
-.upload-box span::before {
-    content: "📂";
-    font-size: 20px;
+.file-info a {
+    color: #727CF5;
+    text-decoration: none;
 }
 
 /* Image Preview */
