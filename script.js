@@ -1,54 +1,72 @@
-function processImage(imageSrc) {
+document.getElementById('imageInput').addEventListener('change', function (event) {
+    let imageFile = event.target.files[0];
+    let preview = document.getElementById('preview');
     let output = document.getElementById('output');
     let loader = document.getElementById('loader');
 
-    let img = new Image();
-    img.src = imageSrc;
-    img.onload = function () {
-        let canvas = document.createElement("canvas");
-        let ctx = canvas.getContext("2d");
+    if (imageFile) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
 
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            // Wait for OpenCV to load, then process the image
+            setTimeout(() => {
+                processImage(preview);
+            }, 500);
+        };
+        reader.readAsDataURL(imageFile);
+    } else {
+        alert("Please select an image.");
+    }
+});
 
-        // Convert to OpenCV Mat
-        let src = cv.imread(canvas);
-        let dst = new cv.Mat();
+function processImage(imgElement) {
+    let output = document.getElementById('output');
+    let loader = document.getElementById('loader');
 
-        // Convert to Grayscale
-        cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
+    let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
 
-        // Apply Thresholding to enhance text
-        cv.adaptiveThreshold(dst, dst, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 11, 2);
+    canvas.width = imgElement.width;
+    canvas.height = imgElement.height;
+    ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
 
-        // Convert back to Image
-        cv.imshow(canvas, dst);
+    let src = cv.imread(canvas);
+    let dst = new cv.Mat();
 
-        // Run OCR on processed image
-        let processedImg = canvas.toDataURL("image/png");
+    // **Apply Grayscale Conversion**
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, 0);
 
-        // Clean up OpenCV Mats
-        src.delete();
-        dst.delete();
+    // **Increase Contrast**
+    cv.equalizeHist(dst, dst);
 
-        // Show loader
-        loader.classList.remove('hidden');
-        output.classList.add('hidden');
+    // **Thresholding (Better OCR Readability)**
+    cv.threshold(dst, dst, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU);
 
-        Tesseract.recognize(
-            processedImg,
-            'eng',
-            {
-                logger: (m) => console.log(m)
-            }
-        ).then(({ data: { text } }) => {
-            loader.classList.add('hidden');
-            output.innerText = text;
-            output.classList.remove('hidden');
-        }).catch(err => {
-            loader.classList.add('hidden');
-            alert("Error: " + err.message);
-        });
-    };
+    // Convert back to canvas
+    cv.imshow(canvas, dst);
+
+    // Cleanup OpenCV memory
+    src.delete();
+    dst.delete();
+
+    let processedImg = canvas.toDataURL("image/png");
+
+    // **Run OCR on Processed Image**
+    loader.classList.remove('hidden');
+    output.classList.add('hidden');
+
+    Tesseract.recognize(
+        processedImg,
+        'eng',
+        { logger: (m) => console.log(m) }
+    ).then(({ data: { text } }) => {
+        loader.classList.add('hidden');
+        output.innerText = text;
+        output.classList.remove('hidden');
+    }).catch(err => {
+        loader.classList.add('hidden');
+        alert("Error: " + err.message);
+    });
 }
