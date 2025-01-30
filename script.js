@@ -19,7 +19,7 @@ function processImage(imageSource) {
     let output = document.getElementById('output');
     let loader = document.getElementById('loader');
 
-    // Reset Output
+    // Hide Output
     output.classList.add('hidden');
     loader.classList.remove('hidden');
 
