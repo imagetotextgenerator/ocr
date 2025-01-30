@@ -1,53 +1,81 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background: #000000;
-    color: #ffffff;
+    background: #F8F9FC;
+    color: #000000;
     margin: 0;
     padding: 0;
 }
 
 /* Header */
 header {
-    background: #727CF5;
+    background: #ffffff;
+    padding: 15px;
     text-align: center;
-    padding: 20px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
+    border-bottom: 2px solid #E5E7EB;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Intro Section */
 .intro {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
+}
+
+.intro h2 {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.intro p {
+    font-size: 16px;
+    color: #4B5563;
 }
 
 /* Tool Section */
 .tool {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 /* Upload Box */
 .upload-box {
     display: block;
-    padding: 20px;
+    padding: 15px;
     border: 2px dashed #727CF5;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
     text-align: center;
-    background: #1e1e1e;
-    color: #ffffff;
-    width: 300px;
+    background: #F3F4F6;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .upload-box:hover {
     background: #727CF5;
-    color: #000000;
+    color: #ffffff;
+}
+
+/* Upload Button */
+.upload-box span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.upload-box span::before {
+    content: "📂";
+    font-size: 20px;
 }
 
 /* Image Preview */
@@ -76,28 +104,48 @@ img {
 
 /* Output */
 #output {
-    background: #333;
-    padding: 10px;
-    border-radius: 5px;
+    background: #F9FAFB;
+    padding: 15px;
+    border-radius: 8px;
     margin-top: 10px;
-    word-wrap: break-word;
     text-align: center;
-    max-width: 400px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #D1D5DB;
+}
+
+/* Advanced Settings */
+.advanced-settings {
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.advanced-settings h3 {
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* Article Section */
 .article {
-    padding: 30px;
+    max-width: 600px;
+    margin: auto;
     text-align: center;
+    padding: 30px;
 }
 
 .article h2 {
     color: #727CF5;
+    font-size: 22px;
 }
 
 .article p {
-    max-width: 600px;
-    margin: auto;
+    color: #4B5563;
+    font-size: 16px;
 }
 
 /* Hidden Elements */
