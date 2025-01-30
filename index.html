@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Image to Text Converter</h1>
+        
+        <label for="imageInput" class="upload-box">
+            <span>📂 Click to Upload Image</span>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+        </label>
+
+        <img id="preview" class="hidden">
+
+        <div class="loader hidden" id="loader"></div>
+
+        <div id="output" class="hidden"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.0.2/tesseract.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
