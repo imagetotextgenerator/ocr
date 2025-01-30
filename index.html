@@ -7,9 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🖼️ Image to Text Converter</h1>
-        
+
+    <!-- Header Section -->
+    <header>
+        <h1>Image to Text Converter</h1>
+    </header>
+
+    <!-- Title & Description -->
+    <section class="intro">
+        <h2>Convert Images into Text in Seconds</h2>
+        <p>Upload an image and extract text easily using our online OCR tool.</p>
+    </section>
+
+    <!-- Tool Section -->
+    <section class="tool">
         <label for="imageInput" class="upload-box">
             <span>📂 Click to Upload Image</span>
             <input type="file" id="imageInput" accept="image/*" hidden>
@@ -20,9 +31,16 @@
         <div class="loader hidden" id="loader"></div>
 
         <div id="output" class="hidden"></div>
-    </div>
+    </section>
+
+    <!-- Article Section -->
+    <section class="article">
+        <h2>About This Tool</h2>
+        <p>This tool allows you to extract text from any image using advanced OCR technology...</p>
+    </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.0.2/tesseract.min.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>
